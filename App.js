@@ -4,38 +4,37 @@ import params from './src/Params';
 import Field from './src/components/Field';
 
 export default class App extends Component {
-    render(){
-        return (
-            <View>
-                <Text style={styles.sectionTitle}>Iniciando o Mines!!</Text>
-                <Text style={styles.sectionTitle}>Tamanho da Grade:
-                    {params.getRowsAmount()}X{params.getColumnsAmount()}
-                </Text>
-                <Field/>
-            </View>
-        )
-    }
+  render() {
+    return (
+      <View style={styles.sectionContainer}>
+        <Text >Iniciando o Mines!!</Text>
+        <Text >Tamanho da Grade:
+          {params.getRowsAmount()}X{params.getColumnsAmount()}
+        </Text>
+        <Field />
+        <Field opened></Field>
+        <Field opened nearMines={1} />
+        <Field opened nearMines={2} />
+        <Field opened nearMines={3} />
+        <Field opened nearMines={4} />
+        <Field opened nearMines={5} />
+        <Field opened nearMines={6} />
+        <Field mined />
+        <Field mined opened />
+        <Field mined opened exploded />
+      </View>
+    )
+  }
 }
 
 
 
 const styles = StyleSheet.create({
   sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
 });
 
 
