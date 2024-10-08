@@ -102,5 +102,6 @@ export {
     openField,
     hadExplosion,
     wonGame,
-    showMines
+    showMines,
+    invertflag
 }

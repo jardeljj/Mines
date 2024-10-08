@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, Alert } from 'react-native';
 import params from './src/Params';
 import MineField from './src/components/MineField';
-import { creatMinedBoard, cloneBoard, openField, hadExplosion, wonGame, showMines } from './src/functions';
+import { creatMinedBoard, cloneBoard, openField, hadExplosion, wonGame, showMines, invertflag } from './src/functions';
 
 export default class App extends Component {
 
@@ -55,9 +55,22 @@ export default class App extends Component {
     }
 
     if (won) {
-      Alert.alert("Ta liberado Gozar")
+      Alert.alert("Ta liberado ser feliz")
     }
     this.setState({ board, lost, won })
+  }
+
+  onSelectField = (row, column) => {
+    const board = cloneBoard(this.state.board)
+    invertflag(board, row, column)
+    const won = wonGame(board)
+
+    if (won) {
+      Alert.alert("Ta liberado ser feliz")
+    }
+
+    this.setState({ board, won })
+
   }
 
 
@@ -69,7 +82,8 @@ export default class App extends Component {
           {params.getRowsAmount()}X{params.getColumnsAmount()}</Text>
         <View style={styles.board}>
           <MineField board={this.state.board}
-            onOpenField={this.onOpenField} />
+            onOpenField={this.onOpenField} 
+            onSelectField={this.onSelectField}/>
         </View>
       </SafeAreaView>
     )
