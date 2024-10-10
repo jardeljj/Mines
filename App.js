@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, Alert } from 'react-native';
 import params from './src/Params';
 import MineField from './src/components/MineField';
-import { creatMinedBoard, cloneBoard, openField, hadExplosion, wonGame, showMines, invertflag } from './src/functions';
+import { creatMinedBoard, cloneBoard, openField, hadExplosion, wonGame, showMines, invertflag, flagsUsed } from './src/functions';
+import Header from './src/components/Header';
 
 export default class App extends Component {
 
@@ -77,13 +78,14 @@ export default class App extends Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <Text >Iniciando o Mines!!</Text>
-        <Text >Tamanho da Grade:
-          {params.getRowsAmount()}X{params.getColumnsAmount()}</Text>
+        {/* <Text >Tamanho da Grade:
+          {params.getRowsAmount()}X{params.getColumnsAmount()}</Text> */}
+        <Header flagsLeft={this.minesAmount() - flagsUsed(this.state.board)}
+          onNewGame={() => this.setState(this.createState())} />
         <View style={styles.board}>
           <MineField board={this.state.board}
-            onOpenField={this.onOpenField} 
-            onSelectField={this.onSelectField}/>
+            onOpenField={this.onOpenField}
+            onSelectField={this.onSelectField} />
         </View>
       </SafeAreaView>
     )
